@@ -1,7 +1,7 @@
 import torch
 import torch.nn.functional as F
 from torchvision import transforms as tf
-from torchvision import models
+from torchvision import models, utils
 from torch import optim
 
 from datetime import datetime
@@ -111,11 +111,11 @@ def main():
         optimizer.zero_grad()
         total_loss.backward()
         optimizer.step()
-        if i%10 == 0:
+        if i%100 == 0:
             print("Epoch {}: ContentLoss: {:4f} StyleLoss: {:4f} TotalLoss: {:4f} time/epoch: {}".format(i, content_loss, style_loss, total_loss, datetime.now()-start_time))
 
 
-
+    utils.save_image(target, '../images/output.jpg')
 
 if __name__ == '__main__':
     main()
